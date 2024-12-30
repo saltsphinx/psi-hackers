@@ -1,0 +1,24 @@
+script.
+  async function logout() {
+    await fetch("/session", { method: "DELETE", credentials: "same-origin" });
+    window.location.replace("/");
+  }
+
+header
+ul
+  li
+    h3
+      a(href="/") psi hackers
+  if currentUser
+    li #{currentUser.full_name}
+    li
+      a(href="javascript:void(0)" "onclick"="logout()") Sign out
+    if !currentUser.is_member
+      li
+        a(href="/join") Join the club
+
+  else
+    li
+      a(href="/login") Login
+    li
+      a(href="/register") Register

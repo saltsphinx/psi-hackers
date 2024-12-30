@@ -1,0 +1,19 @@
+extends index
+
+block content
+  if errors
+    ul
+      each error in errors
+        li #{error.msg}
+  form(method="post" action="/register")
+    label(for="name") Full name:
+    input(type="text" id="name" name="full_name" value=inputs ? inputs.full_name : "")
+    label(for="username") Username:
+    input(type="text" id="username" name="username" value=inputs ? inputs.username : "")
+    label(for="password") Password:
+    input(type="password" id="password" name="password" value="")
+    label(for="confirm_password") Confirm Password:
+    input(type="password" id="confirm_password" name="confirm_password" value="")
+    label(for="is_admin") Are you an admin?
+    input(type="checkbox" id="is_admin" name="is_admin")
+    button(type="submit") Submit

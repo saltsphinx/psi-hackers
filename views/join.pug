@@ -1,0 +1,12 @@
+extends index
+
+block content
+  h1 Join the club
+  p Only users with the secret passcode are allowed to join.
+  if errors
+    ul
+      each error in errors
+        li #{error.msg}
+  form(action="/join" method="POST")
+    label(for="code") Passcode:
+    input(type="text" id="code" name="code" value="")

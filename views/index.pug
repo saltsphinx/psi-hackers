@@ -1,0 +1,39 @@
+doctype html
+
+html(lang="en")
+  script.
+    async function deleteMessage(id) {
+      await fetch("/messages", { body: JSON.stringify({ id }), method: "DELETE", credentials: "same-origin", headers: { "content-type": "application/json" } });
+      window.location.replace("/");
+    }
+
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Document
+  body
+    include includes/header
+    block content
+      h1 Home
+      h2 Messages
+        form(action="/messages" method="POST")
+          fieldset
+            legend message
+            label(for="title") Title
+            input(type="text" name="title" id="title")
+            textarea(name="body", cols="30", rows="10")
+            button(type="submit") Submit
+        ul
+          each message in messages
+            li
+              p #{currentUser.is_member ? message.username : "anonymous"}
+              if currentUser.is_member
+                p #{message.timestamp}
+              p #{message.title}
+              p #{message.body}
+              if currentUser.is_admin
+                button("onclick"=`deleteMessage(${message.id})`) delete
+    footer
+      ul
+        li
+          a(href="/") Home
