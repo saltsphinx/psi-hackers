@@ -1,6 +1,10 @@
 extends index
 
 block content
+  if errors
+      ul
+        each error in errors
+          li #{error}
   form(action="/session" method="POST")
     .mb-3
       label.form-label.lead(for="username") Username:

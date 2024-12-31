@@ -8,6 +8,7 @@ const { validationResult, body } = require("express-validator");
 const validateUser = require("./config/validateUser.js");
 const bcrypt = require("bcryptjs");
 const protectedRoutes = require("./protectedRoutes.js");
+const flash = require("connect-flash");
 require("dotenv").config();
 
 const redirectHome = (req, res, next) => {
@@ -35,6 +36,7 @@ app.use(
   })
 );
 app.use(passport.session());
+app.use(flash());
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
@@ -42,7 +44,9 @@ app.use((req, res, next) => {
 });
 
 app.get("/login", redirectHome, (req, res) => {
-  res.render("login");
+  console.log(req.session);
+
+  res.render("login", { errors: req.flash("error") });
 });
 
 app.get("/register", redirectHome, (req, res) => {
@@ -75,6 +79,7 @@ app.post(
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login",
+    failureFlash: "Username or password are incorrect.",
   })
 );
 
