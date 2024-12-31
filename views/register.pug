@@ -2,9 +2,9 @@ extends index
 
 block content
   if errors
-    ul
+    ul.alert.alert-danger
       each error in errors
-        li #{error.msg}
+        li.ms-2 #{error.msg}
   form(method="post" action="/register")
     .mb-3
       label.form-label.lead(for="name") Full name:
