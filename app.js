@@ -44,8 +44,6 @@ app.use((req, res, next) => {
 });
 
 app.get("/login", redirectHome, (req, res) => {
-  console.log(req.session);
-
   res.render("login", { errors: req.flash("error") });
 });
 
