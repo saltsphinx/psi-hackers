@@ -1,6 +1,6 @@
 doctype html
 
-html(lang="en")
+html(lang="en" data-bs-theme="dark")
   script.
     async function deleteMessage(id) {
       await fetch("/messages", { body: JSON.stringify({ id }), method: "DELETE", credentials: "same-origin", headers: { "content-type": "application/json" } });
