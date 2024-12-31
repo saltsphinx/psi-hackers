@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/join", (req, res) => {
-  res.render("join");
+  res.render("join", { secrets: req.flash("secrets")[0] });
 });
 
 router.post(
@@ -59,6 +59,16 @@ router.delete("/messages", async (req, res) => {
 
   await pool.query("DELETE FROM messages WHERE id = $1", [req.body.id]);
   res.status(204).end();
+});
+
+router.get("/gold-star", async (req, res) => {
+  res.render("gold-star");
+});
+
+router.get("/secrets", async (req, res) => {
+  req.flash("secrets", "true");
+
+  res.redirect("/join");
 });
 
 module.exports = router;

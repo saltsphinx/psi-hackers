@@ -8,7 +8,7 @@ block content
       p.lead.mb-1.fw-bold Benefits of being apart of the club:
     li you're allowed to see the poster of messages
     li you're allowed to see when messages were posted
-    li you get a gold star on the refrigerator, compliments of psi hackers
+    li you get a gold star on the refrigerator#[a.text-warning(href="/gold-star") ,] compliments of psi hackers
   if errors
     ul.alert.alert-danger
       each error in errors
@@ -16,5 +16,8 @@ block content
   form(action="/join" method="POST")
     .d-flex.align-items-center.mb-3
       label.pe-3(for="code") Passcode:
-      input.form-control(type="text" id="code" name="code" value="")
+      if secrets
+        input.form-control.text-warning(type="text" id="code" name="code" value="secrets" readonly)
+      else
+        input.form-control(type="text" id="code" name="code" value="")
     button.btn.btn-primary(type="submit") Submit
