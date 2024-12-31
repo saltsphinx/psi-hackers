@@ -7,6 +7,17 @@ html(lang="en" data-bs-theme="dark")
       window.location.replace("/");
     }
 
+    let messageFormActive = false;
+
+    function switchText() {
+      const toggleButton = document.querySelector("#toggle-btn");
+
+      toggleButton.textContent = !messageFormActive ? "Close" : "Post a message"
+      messageFormActive = !messageFormActive;
+    }
+
+
+
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
@@ -17,25 +28,28 @@ html(lang="en" data-bs-theme="dark")
     include includes/header
     main.container.mb-5
       block content
-        h1 Home
+        h1.border-bottom.mb-3 Home
+        button.mb-3.btn.btn-primary#toggle-btn(type="button" onclick="switchText()" data-bs-toggle="collapse" data-bs-target="#message-form" aria-expanded="false" aria-controls="message-form") Post a message
+        form.border-bottom.mb-3.collapse#message-form(action="/messages" method="POST")
+          .mb-3
+            label.form-label(for="title") Title
+            input.form-control.form-control-sm(type="text" name="title" id="title")
+          .mb-3
+            label.form-label(for="body") Message
+            textarea.mb-3.form-control(name="body", cols="30", rows="3")
+            button.btn.btn-secondary(type="submit") Submit
         h2 Messages
-        form(action="/messages" method="POST")
-          fieldset
-            legend message
-            label(for="title") Title
-            input(type="text" name="title" id="title")
-            textarea(name="body", cols="30", rows="10")
-            button(type="submit") Submit
+        
         ul
           each message in messages
             li
-              p #{currentUser.is_member ? message.username : "anonymous"}
-              if currentUser.is_member
-                p #{message.timestamp}
-              p #{message.title}
+              a.text-light.text-decoration-none(href="/") #{currentUser.is_member ? message.username : "anonymous"} 
+                if currentUser.is_member
+                  span.small.text-secondary #{message.timestamp}
+              p.lead.border-bottom #{message.title}
               p #{message.body}
-              if currentUser.is_admin
-                button("onclick"=`deleteMessage(${message.id})`) delete
+                if currentUser.is_admin
+                  button.d-block.btn.btn-danger.mt-3("onclick"=`deleteMessage(${message.id})`) delete
     footer.container-xl
       ul
         li
