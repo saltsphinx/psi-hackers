@@ -14,12 +14,12 @@ header.mb-3
         ul.navbar-nav.gap-1
           if currentUser
             li.nav-item
-              a.btn.btn-outline-primary #{currentUser.full_name}
-            li.nav-item
-              a.btn.btn-primary(href="javascript:void(0)" "onclick"="logout()") Sign out
+              a.btn.btn-outline-primary #{currentUser.username}
             if !currentUser.is_member
               li.nav-item
                 a.btn.btn-primary(href="/join") Join the club
+            li.nav-item
+              a.btn.btn-primary(href="javascript:void(0)" "onclick"="logout()") Sign out
           else
             li.nav-item
               a.btn.btn-primary(href="/login") Login
