@@ -1,12 +1,20 @@
 extends index
 
 block content
-  h1 Join the club
+  h1.border-bottom.mb-3 Join the club
   p Only users with the secret passcode are allowed to join.
+  ul.border-start.border-2
+    li 
+      p.lead.mb-1.fw-bold Benefits of being apart of the club:
+    li you're allowed to see the poster of messages
+    li you're allowed to see when messages were posted
+    li you get a gold star on the refrigerator, compliments of psi hackers
   if errors
-    ul
+    ul.alert.alert-danger
       each error in errors
-        li #{error.msg}
+        li.ms-2 #{error.msg}
   form(action="/join" method="POST")
-    label(for="code") Passcode:
-    input(type="text" id="code" name="code" value="")
+    .d-flex.align-items-center.mb-3
+      label.pe-3(for="code") Passcode:
+      input.form-control(type="text" id="code" name="code" value="")
+    button.btn.btn-primary(type="submit") Submit

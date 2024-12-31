@@ -44,7 +44,7 @@ html(lang="en" data-bs-theme="dark")
           ul
             each message in messages
               li
-                a.text-light.text-decoration-none(href="/") #{currentUser.is_member ? message.username : "anonymous"} 
+                a.text-light.text-decoration-none(href="javascript:void(0)") #{currentUser.is_member ? message.username : "anonymous"} 
                   if currentUser.is_member
                     span.small.text-secondary #{message.timestamp}
                 p.lead.border-bottom #{message.title}

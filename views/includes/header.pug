@@ -14,7 +14,7 @@ header.mb-3
         ul.navbar-nav.gap-1
           if currentUser
             li.nav-item
-              a.btn.btn-outline-primary #{currentUser.username}
+              a.btn.btn-outline-primary(href="javascript:void(0)") #{currentUser.username}
             if !currentUser.is_member
               li.nav-item
                 a.btn.btn-primary(href="/join") Join the club
