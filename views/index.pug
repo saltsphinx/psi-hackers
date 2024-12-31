@@ -52,6 +52,8 @@ html(lang="en" data-bs-theme="dark")
                   if currentUser.is_admin
                     button.d-block.btn.btn-danger.mt-3("onclick"=`deleteMessage(${message.id})`) delete
     footer.container-xl
-      ul
+      ul.d-flex
         li
           a(href="/") Home
+        li.ms-4
+          a(href="https://github.com/saltsphinx/psi-hackers" target="_blank") Source code
