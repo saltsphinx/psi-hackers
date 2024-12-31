@@ -10,5 +10,8 @@
     "passport-local": "^1.0.0",
     "pg": "^8.13.1",
     "pug": "^3.0.3"
+  },
+  "scripts": {
+    "dev": "node app.js --watch & sleep 1 && xdg-open http://localhost:3000/"
   }
 }

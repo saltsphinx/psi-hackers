@@ -4,21 +4,24 @@ script.
     window.location.replace("/");
   }
 
-header
-ul
-  li
-    h3
-      a(href="/") psi hackers
-  if currentUser
-    li #{currentUser.full_name}
-    li
-      a(href="javascript:void(0)" "onclick"="logout()") Sign out
-    if !currentUser.is_member
-      li
-        a(href="/join") Join the club
-
-  else
-    li
-      a(href="/login") Login
-    li
-      a(href="/register") Register
+header.mb-3
+  nav.navbar.navbar-expand-sm.border-bottom.bg-dark(data-bs-theme="dark")
+    .container-xl
+      a.navbar-brand(href="/") psi hackers
+      button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation")
+        span.navbar-toggler-icon
+      .collapse.navbar-collapse.justify-content-end#navbar
+        ul.navbar-nav.gap-1
+          if currentUser
+            li.nav-item
+              a.btn.btn-outline-primary #{currentUser.full_name}
+            li.nav-item
+              a.btn.btn-primary(href="javascript:void(0)" "onclick"="logout()") Sign out
+            if !currentUser.is_member
+              li.nav-item
+                a.btn.btn-primary(href="/join") Join the club
+          else
+            li.nav-item
+              a.btn.btn-primary(href="/login") Login
+            li.nav-item
+              a.btn.btn-primary(href="/register") Register
