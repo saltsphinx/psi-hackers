@@ -28,28 +28,29 @@ html(lang="en" data-bs-theme="dark")
     include includes/header
     main.container.mb-5
       block content
-        h1.border-bottom.mb-3 Home
-        button.mb-3.btn.btn-primary#toggle-btn(type="button" onclick="switchText()" data-bs-toggle="collapse" data-bs-target="#message-form" aria-expanded="false" aria-controls="message-form") Post a message
-        form.border-bottom.mb-3.collapse#message-form(action="/messages" method="POST")
-          .mb-3
-            label.form-label(for="title") Title
-            input.form-control.form-control-sm(type="text" name="title" id="title")
-          .mb-3
-            label.form-label(for="body") Message
-            textarea.mb-3.form-control(name="body", cols="30", rows="3")
-            button.btn.btn-secondary(type="submit") Submit
-        h2 Messages
-        
-        ul
-          each message in messages
-            li
-              a.text-light.text-decoration-none(href="/") #{currentUser.is_member ? message.username : "anonymous"} 
-                if currentUser.is_member
-                  span.small.text-secondary #{message.timestamp}
-              p.lead.border-bottom #{message.title}
-              p #{message.body}
-                if currentUser.is_admin
-                  button.d-block.btn.btn-danger.mt-3("onclick"=`deleteMessage(${message.id})`) delete
+        section.min-vh-100
+          h1.border-bottom.mb-3 Home
+          button.mb-3.btn.btn-primary#toggle-btn(type="button" onclick="switchText()" data-bs-toggle="collapse" data-bs-target="#message-form" aria-expanded="false" aria-controls="message-form") Post a message
+          form.border-bottom.mb-3.collapse#message-form(action="/messages" method="POST")
+            .mb-3
+              label.form-label(for="title") Title
+              input.form-control.form-control-sm(type="text" name="title" id="title")
+            .mb-3
+              label.form-label(for="body") Message
+              textarea.mb-3.form-control(name="body", cols="30", rows="3")
+              button.btn.btn-secondary(type="submit") Submit
+          h2 Messages
+          
+          ul
+            each message in messages
+              li
+                a.text-light.text-decoration-none(href="/") #{currentUser.is_member ? message.username : "anonymous"} 
+                  if currentUser.is_member
+                    span.small.text-secondary #{message.timestamp}
+                p.lead.border-bottom #{message.title}
+                p #{message.body}
+                  if currentUser.is_admin
+                    button.d-block.btn.btn-danger.mt-3("onclick"=`deleteMessage(${message.id})`) delete
     footer.container-xl
       ul
         li
