@@ -62,8 +62,8 @@ app.post("/register", validateUser, async (req, res, next) => {
   try {
     const hash = await bcrypt.hash(req.body.password, 10);
     await pool.query(
-      "INSERT INTO users (full_name, username, password, is_admin) VALUES ($1, $2, $3, $4)",
-      [req.body.full_name, req.body.username, hash, req.body.is_admin || false]
+      "INSERT INTO users (full_name, username, password, is_admin) VALUES ($1, $2, $3, false)",
+      [req.body.full_name, req.body.username, hash]
     );
   } catch (err) {
     next(err);
